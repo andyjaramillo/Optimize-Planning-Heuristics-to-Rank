@@ -15,11 +15,11 @@ def main():
     parameters = parser.parse_args()
 
     states = get_data()
+    states_np = np.array(states)
     print("Loading data done!")
     #sample 2000
-    index = np.random.permutation(1)[:1]#32016
-    sample_states = [states[i] for i in index]
-
+    rng = np.random.default_rng()
+    sample_states = rng.choice(states_np, size=20000, replace=False, axis=0)
     expand_search_algs(sample_states,parameters.heur_search_algorithm,parameters.loss)
 
 if __name__ == "__main__":
